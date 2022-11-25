@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState} from "react";
+import UploadImage from "./Components/UploadImage";
+import { Fab } from "@mui/material";
+import CollectionsIcon from "@mui/icons-material/Collections";
+import GalleryView from "./Components/GalleryView";
 
 function App() {
+  const [isShown, setIsShown] = useState(false);
+
+  const handleClick = (event) => {
+    setIsShown((current) => !current);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UploadImage />
+      <Fab
+        variant="extended"
+        size="big"
+        color="primary"
+        onClick={handleClick}
+        style={{ position: "absolute", top: 40, left: 350 }}
+      >
+        <CollectionsIcon sx={{ mr: 1 }} />
+        Galeri
+      </Fab>
+      {isShown && <GalleryView />}
     </div>
   );
 }
